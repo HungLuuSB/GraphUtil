@@ -1,0 +1,14 @@
+/home/hunglil/VisualCode/GraphUtil/bin/Debug/net9.0/GraphUtil
+/home/hunglil/VisualCode/GraphUtil/bin/Debug/net9.0/GraphUtil.deps.json
+/home/hunglil/VisualCode/GraphUtil/bin/Debug/net9.0/GraphUtil.runtimeconfig.json
+/home/hunglil/VisualCode/GraphUtil/bin/Debug/net9.0/GraphUtil.dll
+/home/hunglil/VisualCode/GraphUtil/bin/Debug/net9.0/GraphUtil.pdb
+/home/hunglil/VisualCode/GraphUtil/obj/Debug/net9.0/GraphUtil.GeneratedMSBuildEditorConfig.editorconfig
+/home/hunglil/VisualCode/GraphUtil/obj/Debug/net9.0/GraphUtil.AssemblyInfoInputs.cache
+/home/hunglil/VisualCode/GraphUtil/obj/Debug/net9.0/GraphUtil.AssemblyInfo.cs
+/home/hunglil/VisualCode/GraphUtil/obj/Debug/net9.0/GraphUtil.csproj.CoreCompileInputs.cache
+/home/hunglil/VisualCode/GraphUtil/obj/Debug/net9.0/GraphUtil.dll
+/home/hunglil/VisualCode/GraphUtil/obj/Debug/net9.0/refint/GraphUtil.dll
+/home/hunglil/VisualCode/GraphUtil/obj/Debug/net9.0/GraphUtil.pdb
+/home/hunglil/VisualCode/GraphUtil/obj/Debug/net9.0/GraphUtil.genruntimeconfig.cache
+/home/hunglil/VisualCode/GraphUtil/obj/Debug/net9.0/ref/GraphUtil.dll
