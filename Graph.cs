@@ -5,6 +5,7 @@ public abstract class Graph {
   /// May only be used by EdgeLishGraph
   ///</summary>
   protected readonly int edges;
+  protected readonly bool weighted;
 
   public Graph(int vertices, bool directed = false){
     this.vertices = vertices;
@@ -16,6 +17,14 @@ public abstract class Graph {
     this.directed = directed;
     this.edges = edges;
   }
+
+  public Graph(int vertices, int edges, bool directed = false, bool weighted = false){
+    this.vertices = vertices;
+    this.directed = directed;
+    this.edges = edges;
+    this.weighted = weighted;
+  }
+
 
   public abstract void AddEdge(int v1, int v2, int w);
   public abstract void DeleteEdge(int v1, int v2);

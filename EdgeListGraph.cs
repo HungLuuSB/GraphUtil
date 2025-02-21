@@ -2,7 +2,7 @@ public class EdgeData {
   public int Vertex { get; set; }
   public int AdjVertex { get; set; }
   public int Weight { get; set; }
-  public EdgeData(int v, int adjV, int w){
+  public EdgeData(int v, int adjV, int w = 0){
     Vertex = v;
     AdjVertex = adjV;
     Weight = w;
