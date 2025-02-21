@@ -71,7 +71,7 @@ public class EdgeListGraph : Graph {
   public override void DeleteEdge(int v1, int v2){
     EdgeData edge_1 = GetEdgeDataFromVertex(v1, v2);
     edgeList.Remove(edge_1);
-    if (directed){
+    if (!directed){
       EdgeData edge_2 = GetEdgeDataFromVertex(v2, v1);
       edgeList.Remove(edge_2);
     }
