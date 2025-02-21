@@ -1,8 +1,8 @@
-public class EgdeData {
+public class EdgeData {
   public int Vertex { get; set; }
   public int AdjVertex { get; set; }
   public int Weight { get; set; }
-  public EgdeData(int v, int adjV, int w){
+  public EdgeData(int v, int adjV, int w){
     Vertex = v;
     AdjVertex = adjV;
     Weight = w;
@@ -10,17 +10,17 @@ public class EgdeData {
 }
 
 public class EdgeListGraph : Graph {
-  List<EgdeData> edgeList;
+  List<EdgeData> edgeList;
   public EdgeListGraph(int vertices, int edges, bool directed = false)
   :base(vertices, edges, directed){
-    edgeList = new List<EgdeData>();
+    edgeList = new List<EdgeData>();
   }
   
   private void GenerateEmptyList(){
     
   }
   
-  private EgdeData GetEgdeDataFromVertex(int v1, int v2){
+  private EdgeData GetEdgeDataFromVertex(int v1, int v2){
     foreach (var data in edgeList){
       if (data.Vertex == v1 && data.AdjVertex == v2){
         return data;
@@ -29,8 +29,8 @@ public class EdgeListGraph : Graph {
     return null;
   }
 
-  private List<EgdeData> GetEgdeDatasFromVertex(int v){
-    List<EgdeData> result = new List<EgdeData>();
+  private List<EdgeData> GetEdgeDatasFromVertex(int v){
+    List<EdgeData> result = new List<EdgeData>();
     foreach (var data in edgeList){
       if (data.Vertex == v)
         result.Add(data);
@@ -39,32 +39,32 @@ public class EdgeListGraph : Graph {
   }
 
   public override void AddEdge(int v1, int v2, int w){
-    EgdeData data_0 = new EgdeData(v1, v2, w);
+    EdgeData data_0 = new EdgeData(v1, v2, w);
     edgeList.Add(data_0);
     if (directed){ 
-      EgdeData data_1 = new EgdeData(v2, v1, w);
+      EdgeData data_1 = new EdgeData(v2, v1, w);
       edgeList.Add(data_1);
     }
   }
 
   public override void DeleteEdge(int v1, int v2){
-    EgdeData edge_1 = GetEgdeDataFromVertex(v1, v2);
+    EdgeData edge_1 = GetEdgeDataFromVertex(v1, v2);
     edgeList.Remove(edge_1);
     if (directed){
-      EgdeData edge_2 = GetEgdeDataFromVertex(v2, v1);
+      EdgeData edge_2 = GetEdgeDataFromVertex(v2, v1);
       edgeList.Remove(edge_2);
     }
   }
 
   public override int GetEdgeWeight(int v1, int v2){
-    EgdeData edge = GetEgdeDataFromVertex(v1, v2);
+    EdgeData edge = GetEdgeDataFromVertex(v1, v2);
     if (edge != null)
       return edge.Weight;
     return -1;
   }
 
   public override int GetVertexOutDegree(int v){
-    List<EgdeData> result = GetEgdeDatasFromVertex(v);
+    List<EdgeData> result = GetEdgeDatasFromVertex(v);
     return result.Count;
   }
 
@@ -87,9 +87,18 @@ public class EdgeListGraph : Graph {
   }
 
   public override bool CheckAdjacentVertices(int v1, int v2){
-    if (GetEgdeDataFromVertex(v1, v2) != null)
+    if (GetEdgeDataFromVertex(v1, v2) != null)
       return true;
     return false;
+  }
+
+  public override List<int> GetAdjacentVertices(int v){
+    List<EdgeData> edges = GetEdgeDatasFromVertex(v);
+    List<int> result = new List<int>();
+    foreach (var edge in edges){
+      result.Add(edge.Vertex);
+    }
+    return result;
   }
 
   public override List<int> BFS(int s){
