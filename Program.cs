@@ -1,10 +1,9 @@
-﻿string inputFileName = "input/AdjList.INP";
+﻿string inputFileName = "input/EdgeList.INP";
 if (!File.Exists(inputFileName))
   throw new Exception("No input file found!");
 
-AdjacencyListGraph adjacencyListGraph = AdjacencyListGraph.ReadAdjacencyList(inputFileName);
-AdjacencyMatrixGraph adjacencyMatrixGraph = GraphConverter.ConvertAdjListToAdjMatrix(adjacencyListGraph);
+EdgeListGraph graph = EdgeListGraph.ReadEdgeList(inputFileName);
 
-var result = adjacencyMatrixGraph.GetVertexOutDegree(3);
+var result = graph.GetVertexOutDegree(2);
 Console.WriteLine(result);
 Console.WriteLine("Finished");

@@ -12,3 +12,4 @@
 /home/hunglil/VisualCode/GraphUtil/obj/Debug/net9.0/GraphUtil.pdb
 /home/hunglil/VisualCode/GraphUtil/obj/Debug/net9.0/GraphUtil.genruntimeconfig.cache
 /home/hunglil/VisualCode/GraphUtil/obj/Debug/net9.0/ref/GraphUtil.dll
+/home/hunglil/VisualCode/GraphUtil/obj/Debug/net9.0/GraphUtil.sourcelink.json

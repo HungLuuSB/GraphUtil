@@ -11,13 +11,34 @@ public class EdgeData {
 
 public class EdgeListGraph : Graph {
   List<EdgeData> edgeList;
-  public EdgeListGraph(int vertices, int edges, bool directed = false)
-  :base(vertices, edges, directed){
+  public EdgeListGraph(int vertices, int edges, bool directed = false, bool weighted = false)
+  :base(vertices, edges, directed, weighted){
     edgeList = new List<EdgeData>();
   }
   
   private void GenerateEmptyList(){
     
+  }
+
+  public static EdgeListGraph ReadEdgeList(string filePath, bool directed = false, bool weighted = false){
+    StreamReader sr = new StreamReader(filePath);
+    string line = sr.ReadLine();
+    string[] param = line.Split(" ");
+    int n = int.Parse(param[0]);
+    int e = int.Parse(param[1]);
+    EdgeListGraph graph = new EdgeListGraph(n, e, directed, weighted);
+    for (int i = 1; i <= e; i++){
+      line = sr.ReadLine();
+      string[] values = line.Split(" ");
+      int v = int.Parse(values[0]);
+      int adjV = int.Parse(values[1]);
+      int w = 0;
+      if (weighted && values.Length >= 2){
+        w = int.Parse(values[2]);
+      }
+      graph.AddEdge(v, adjV, w);
+    }
+    return graph;
   }
   
   private EdgeData GetEdgeDataFromVertex(int v1, int v2){
@@ -41,7 +62,7 @@ public class EdgeListGraph : Graph {
   public override void AddEdge(int v1, int v2, int w){
     EdgeData data_0 = new EdgeData(v1, v2, w);
     edgeList.Add(data_0);
-    if (directed){ 
+    if (!directed){ 
       EdgeData data_1 = new EdgeData(v2, v1, w);
       edgeList.Add(data_1);
     }
