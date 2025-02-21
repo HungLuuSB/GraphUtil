@@ -47,6 +47,15 @@ public class EdgeListGraph : Graph {
     }
   }
 
+  public override void DeleteEdge(int v1, int v2){
+    EgdeData edge_1 = GetEgdeDataFromVertex(v1, v2);
+    edgeList.Remove(edge_1);
+    if (directed){
+      EgdeData edge_2 = GetEgdeDataFromVertex(v2, v1);
+      edgeList.Remove(edge_2);
+    }
+  }
+
   public override int GetEdgeWeight(int v1, int v2){
     EgdeData edge = GetEgdeDataFromVertex(v1, v2);
     if (edge != null)
@@ -67,5 +76,27 @@ public class EdgeListGraph : Graph {
       }
     }
     return inDegree;
+  }
+
+  public override List<int> GetVertexInOutDegree(int v){
+    int inDegree = GetVertexInDegree(v), outDegree = GetVertexOutDegree(v);
+    List<int> result = new List<int>();
+    result.Add(inDegree);
+    result.Add(outDegree);
+    return result;
+  }
+
+  public override bool CheckAdjacentVertices(int v1, int v2){
+    if (GetEgdeDataFromVertex(v1, v2) != null)
+      return true;
+    return false;
+  }
+
+  public override List<int> BFS(int s){
+    throw new NotImplementedException();
+  }
+
+  public override bool IsConnectedGraph(){
+    throw new NotImplementedException();
   }
 }
