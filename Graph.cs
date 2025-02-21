@@ -1,10 +1,20 @@
 public abstract class Graph {
   protected readonly int vertices;
   protected readonly bool directed;
+  ///<summary>
+  /// May only be used by EdgeLishGraph
+  ///</summary>
+  protected readonly int edges;
 
   public Graph(int vertices, bool directed = false){
     this.vertices = vertices;
     this.directed = directed;
+  }
+
+  public Graph(int vertices, int edges, bool directed = false){
+    this.vertices = vertices;
+    this.directed = directed;
+    this.edges = edges;
   }
 
   public abstract void AddEdge(int v1, int v2, int w);
