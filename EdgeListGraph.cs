@@ -15,10 +15,6 @@ public class EdgeListGraph : Graph {
   :base(vertices, edges, directed, weighted){
     edgeList = new List<EdgeData>();
   }
-  
-  private void GenerateEmptyList(){
-    
-  }
 
   public static EdgeListGraph ReadEdgeList(string filePath, bool directed = false, bool weighted = false){
     StreamReader sr = new StreamReader(filePath);

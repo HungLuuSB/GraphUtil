@@ -111,17 +111,9 @@ public class AdjacencyListGraph : Graph {
     return result;
   }
 
+
+  // Only available by using Weight-support Graph
   public void Dijkstra(int s){
-    int[] dist = new int[vertices + 1];
-    for (int i = 0; i <= dist.Length; i++){
-      dist[i] = int.MaxValue;
-    }
-    int[] pred = new int[vertices + 1];
-    for (int i = 0; i <= pred.Length; i++){
-      pred[i] = -1;
-    }
-    bool[] visited = new bool[vertices + 1];
-    dist[s] = 0;
-    visited[s] = true;
+    throw new NotImplementedException();   
   }
 }
