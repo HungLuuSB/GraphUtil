@@ -1,3 +1,8 @@
+public enum SearchMethod {
+  BSF,
+  DFS
+}
+
 public abstract class Graph {
   protected readonly int vertices;
   protected readonly bool directed;
