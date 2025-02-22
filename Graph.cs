@@ -1,7 +1,8 @@
-public enum SearchMethod {
+public enum GraphTraverseMethod {
   BSF,
   DFS
 }
+
 
 public abstract class Graph {
   protected readonly int vertices;
