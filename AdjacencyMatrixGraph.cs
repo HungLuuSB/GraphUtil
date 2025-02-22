@@ -1,7 +1,7 @@
 public class AdjacencyMatrixGraph : Graph {
   int[,] matrix;
-  public AdjacencyMatrixGraph(int vertices, bool directed = false)
-  :base(vertices, directed)
+  public AdjacencyMatrixGraph(int vertices, bool directed = false, bool weighted = false)
+  :base(vertices, directed, weighted)
   {
     this.matrix = new int[vertices + 1, vertices + 1];
     GenerateEmptyMatrix(vertices);
@@ -24,7 +24,7 @@ public class AdjacencyMatrixGraph : Graph {
 
   public override void DeleteEdge(int v1, int v2){
     this.matrix[v1, v2] = 0;
-    if (this.directed)
+    if (!this.directed)
       this.matrix[v2, v1] = 0;
   }
 

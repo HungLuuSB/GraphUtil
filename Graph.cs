@@ -7,9 +7,10 @@ public abstract class Graph {
   protected readonly int edges;
   protected readonly bool weighted;
 
-  public Graph(int vertices, bool directed = false){
+  public Graph(int vertices, bool directed = false, bool weighted = false){
     this.vertices = vertices;
     this.directed = directed;
+    this.weighted = weighted;
   }
 
   public Graph(int vertices, int edges, bool directed = false){
