@@ -15,14 +15,14 @@ public class AdjacencyListGraph : Graph {
 
   public override void AddEdge(int v1, int v2, int w){
     this.adjList[v1].Add(v2);
-    if (this.directed)
-      this.adjList[v2].Add(v1);
+    //if (!this.directed)
+     // this.adjList[v2].Add(v1);
   }
 
   public override void DeleteEdge(int v1, int v2){
     this.adjList[v1].Remove(v2);
-    if (this.directed)
-      this.adjList[v2].Remove(v1);
+    //if (!this.directed)
+    //  this.adjList[v2].Remove(v1);
   }
 
   public static AdjacencyListGraph ReadAdjacencyList(string path, bool directed = false){
@@ -108,6 +108,34 @@ public class AdjacencyListGraph : Graph {
       }
     }
     result.RemoveAt(0);
+    return result;
+  }
+
+  public List<int> FindPath(int s, int e){
+    List<int> result = new List<int>();
+    Queue<int> queue = new Queue<int>();
+    bool[] visited = new bool[vertices + 1];
+    int[] pre = new int[vertices + 1];
+    Array.Fill(pre, -1);
+    visited[s] = true;
+    queue.Enqueue(s);
+    while (queue.Count > 0){
+      int curr = queue.Dequeue();
+      if (curr == e)
+        break;
+      foreach (int neighbor in this.adjList[curr]){
+        if (!visited[neighbor]){
+          visited[neighbor] = true;
+          queue.Enqueue(neighbor);
+          pre[neighbor] = curr;
+        }
+      }
+    }
+    int node = e;
+    while (pre[node] != -1){
+      result.Add(node);
+      node = pre[node];
+    }
     return result;
   }
 

@@ -3,7 +3,7 @@ public enum GraphTraverseMethod {
   DFS
 }
 
-
+// Should be an interface instead ?
 public abstract class Graph {
   protected readonly int vertices;
   protected readonly bool directed;
