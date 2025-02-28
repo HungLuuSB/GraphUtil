@@ -138,10 +138,36 @@ public class AdjacencyListGraph : Graph {
     }
     return result;
   }
-
+  
+  public List<int> DFS(int s){
+    List<int> result = new List<int>();
+    Stack<int> stack = new Stack<int>();
+    bool[] visited = new bool[vertices + 1];
+    visited[s] = true;
+    stack.Push(s);
+    while (stack.Count > 0){
+      int curr = stack.Pop();
+      result.Add(curr);
+      foreach (int neighbor in this.adjList[curr]){
+        if (!visited[neighbor]){
+          visited[neighbor] = true;
+          stack.Push(neighbor);
+        }
+      }
+    }
+    result.RemoveAt(0);
+    return result;
+  }
 
   // Only available by using Weight-support Graph
   public void Dijkstra(int s){
-    throw new NotImplementedException();   
+    int[] dist = new int[vertices + 1];
+    Array.Fill(dist, int.MaxValue);
+    int[] pre = new int[vertices + 1];
+    Array.Fill(pre, -1);
+    bool[] visited = new bool[vertices + 1];
+    
   }
+
+
 }

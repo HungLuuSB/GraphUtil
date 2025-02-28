@@ -112,4 +112,52 @@ public class AdjacencyMatrixGraph : Graph {
     result.RemoveAt(0);
     return result;
   }
+
+  public int FindMinVertexUnvisited(bool[] visited, int[] dist){
+    int min_vertex = -1;
+    int min_dist = int.MaxValue;
+    for (int i = 1; i <= vertices; i++){
+      if (!visited[i] && dist[i] < min_dist){
+        min_dist = dist[i];
+        min_vertex = i;
+      }
+    }
+    return min_vertex;
+  }
+
+  public int[] Dijkstra(int s, int e = -1){
+    bool[] visited = new bool[vertices + 1];
+    int[] pre = new int[vertices + 1];
+    Array.Fill(pre, -1);
+    int[] dist = new int[vertices + 1];
+    Array.Fill(dist, int.MaxValue);
+    dist[s] = 0;
+    for (int i = 1; i <= vertices; i++){
+      int vertex = FindMinVertexUnvisited(visited, dist);
+      visited[vertex] = true;
+      foreach (int neighbor in GetAdjacentVertices(vertex)){
+        if (!visited[neighbor]){
+          if (dist[neighbor] > dist[vertex] + GetEdgeWeight(vertex, neighbor)){
+            dist[neighbor] = dist[vertex] + GetEdgeWeight(vertex, neighbor);
+            pre[neighbor] = vertex;        
+          }
+        }
+      }
+    }
+    if (e != -1 && visited[e]){
+      List<int> path = new List<int>();
+      int node = e;
+      while (pre[node] != -1){
+        path.Add(node);
+        node = pre[node];
+      }
+      path.Reverse();
+      return path.ToArray();
+    }
+    return dist;
+  }
+
+  public int[] DijkstraMiddleMan(int s, int m, int e = -1){
+    return new int[5];
+  }
 }

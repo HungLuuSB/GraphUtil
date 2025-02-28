@@ -1,3 +1,6 @@
+///<summary>
+///An utility class to help with convertion between different graphs
+///</summary>
 public static class GraphConverter {
   public static AdjacencyMatrixGraph ConvertAdjListToAdjMatrix(AdjacencyListGraph adjacencyListGraph){
     AdjacencyMatrixGraph adjacencyMatrixGraph = new AdjacencyMatrixGraph(adjacencyListGraph.Vertices, adjacencyListGraph.Directed);
