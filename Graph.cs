@@ -45,4 +45,6 @@ public abstract class Graph {
   public abstract List<int> BFS(int v);
   public int Vertices { get {return this.vertices; } }
   public bool Directed { get {return this.directed; } }
+  // TODO: Convert this abstract class into an inteface because we don't really need OOP
+  //
 }

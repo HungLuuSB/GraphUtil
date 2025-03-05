@@ -22,4 +22,6 @@ public static class GraphConverter {
     }
     return adjacencyListGraph;
   }
+
+  // TODO: Add more convertion for other type of Graph
 }

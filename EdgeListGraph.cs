@@ -125,4 +125,8 @@ public class EdgeListGraph : Graph {
   public override bool IsConnectedGraph(){
     throw new NotImplementedException();
   }
+
+  public List<int> Dijkstra(int s, int e){
+    throw new NotImplementedException();
+  }
 }

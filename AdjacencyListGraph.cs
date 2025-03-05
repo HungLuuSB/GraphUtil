@@ -166,7 +166,6 @@ public class AdjacencyListGraph : Graph {
     int[] pre = new int[vertices + 1];
     Array.Fill(pre, -1);
     bool[] visited = new bool[vertices + 1];
-    
   }
 
 
