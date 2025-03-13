@@ -148,7 +148,6 @@ public class EdgeListGraph : Graph {
     SortByWeight();
     List<EdgeData> mst = new List<EdgeData>();
     int count = 0;
-    int index = 0;
     foreach (var edge in edgeList){
       if (count >= edges - 1)
         break;
