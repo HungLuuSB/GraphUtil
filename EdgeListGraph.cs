@@ -29,7 +29,7 @@ public class EdgeListGraph : Graph {
       int v = int.Parse(values[0]);
       int adjV = int.Parse(values[1]);
       int w = 0;
-      if (weighted && values.Length >= 2){
+      if (weighted && values.Length == 3){
         w = int.Parse(values[2]);
       }
       graph.AddEdge(v, adjV, w);
@@ -113,7 +113,7 @@ public class EdgeListGraph : Graph {
     List<EdgeData> edges = GetEdgeDatasFromVertex(v);
     List<int> result = new List<int>();
     foreach (var edge in edges){
-      result.Add(edge.Vertex);
+      result.Add(edge.AdjVertex);
     }
     return result;
   }
@@ -128,5 +128,86 @@ public class EdgeListGraph : Graph {
 
   public List<int> Dijkstra(int s, int e){
     throw new NotImplementedException();
+  }
+
+  public void SortByWeight(){
+    edgeList.Sort((a, b) => {
+        return a.Weight.CompareTo(b.Weight);
+        });
+  }
+
+  public bool MakeConnectedGraph(int u, int v, int[] labels){
+    throw new NotImplementedException();
+  }
+
+  public void Kruskal(){
+    int[] labels = new int[vertices + 1];
+    for (int i = 1; i <= vertices; i++){
+      labels[i] = i;
+    }
+    SortByWeight();
+    List<EdgeData> mst = new List<EdgeData>();
+    int count = 0;
+    int index = 0;
+    foreach (var edge in edgeList){
+      if (count >= edges - 1)
+        break;
+      if (labels[edge.Vertex] != labels[edge.AdjVertex]){
+        mst.Add(edge);
+        count++;
+        for (int i = 1; i <= vertices; i++){
+          if (labels[i] == edge.AdjVertex){
+            labels[i] = labels[edge.Vertex];
+          }
+        }
+      }
+    }
+    foreach (var edge in mst){
+      Console.WriteLine($"{edge.Vertex} {edge.AdjVertex} {edge.Weight}");
+    }
+  }
+
+  private int GetMinWeightedVertex(bool[] inMST, int[] weight){
+    int minValue = int.MaxValue;
+    int minVertex = -1;
+    for(int i = 1; i <= vertices; i++){
+      if (!inMST[i] && weight[i] < minValue){
+        minValue = weight[i];
+        minVertex = i;
+      }
+    }
+    return minVertex;
+  }
+
+  public void Prim(int s){
+    List<EdgeData> mst = new List<EdgeData>();
+    int[] pre = new int[vertices + 1];
+    bool[] inMST = new bool[vertices + 1];
+    int[] weight = new int[vertices + 1];
+
+    Array.Fill(pre, -1);
+    Array.Fill(weight, int.MaxValue);
+
+    weight[s] = 0;
+    for (int i = 0; i < vertices; i++){
+      int curr = GetMinWeightedVertex(inMST, weight);
+      Console.WriteLine(curr);
+      inMST[curr] = true;
+      if (pre[curr] != -1){
+        mst.Add(new EdgeData(pre[curr], curr, weight[curr]));
+      }
+      foreach (var neighbor in GetAdjacentVertices(curr)){
+        Console.WriteLine(neighbor);
+        if (!inMST[neighbor]){
+          if (weight[neighbor] > GetEdgeWeight(curr, neighbor)){
+            weight[neighbor] = GetEdgeWeight(curr, neighbor);
+            pre[neighbor] = curr;
+          }
+        }
+      }
+    }
+    foreach (var edge in mst){
+      Console.WriteLine($"{edge.Vertex} {edge.AdjVertex} {edge.Weight}");
+    }
   }
 }

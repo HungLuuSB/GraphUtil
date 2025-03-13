@@ -139,7 +139,7 @@ public class AdjacencyMatrixGraph : Graph {
         if (!visited[neighbor]){
           if (dist[neighbor] > dist[vertex] + GetEdgeWeight(vertex, neighbor)){
             dist[neighbor] = dist[vertex] + GetEdgeWeight(vertex, neighbor);
-            pre[neighbor] = vertex;        
+            pre[neighbor] = vertex;
           }
         }
       }
@@ -157,7 +157,86 @@ public class AdjacencyMatrixGraph : Graph {
     return dist;
   }
 
-  public int[] DijkstraMiddleMan(int s, int m, int e = -1){
-    return new int[5];
+  public int[] DijkstraMiddleMan(int s, int m, int e){
+    List<int> list_first = Dijkstra(s, m).ToList();
+    List<int> list_second = Dijkstra(m, e).ToList();
+    //list_second.RemoveAt(0);
+    list_first.AddRange(list_second);
+    return list_first.ToArray();
+  }
+
+  public List<int> FloydWarshall(int s, int e){
+    int[,] dist = new int[vertices + 1, vertices + 1];
+    for (int i = 1; i <= vertices; i++){
+      for (int j = 1; j <= vertices; j++){
+        if (GetEdgeWeight(i, j) != 0){
+          dist[i, j] = GetEdgeWeight(i, j);
+        }else{
+          dist[i, j] = int.MaxValue;
+        }
+      }
+    }
+    int[,] pre = new int[vertices + 1, vertices + 1];
+    for (int i = 1; i <= vertices; i++){
+      for (int j = 1; j <= vertices; j++){
+        pre[i, j] = i;
+      }
+    }
+    for (int k = 1; k <= vertices; k++){
+      for (int u = 1; u <= vertices; u++){
+        for (int v = 1; v <= vertices; v++){
+          if (v == k || u == k || u == v)
+            continue;
+          if (dist[u, v] > dist[u, k] + dist[k, v]){
+            dist[u, v] = dist[u, k] + dist[k, v];
+            pre[u, v] = pre[k, v];
+          }
+        }
+      }
+    }
+    List<int> path = new List<int>();
+    int node = pre[s, e];
+    int tmp = e;
+    path.Add(tmp);
+    while (pre[s, tmp] != s){
+      path.Add(pre[s, e]);
+      tmp = pre[s, tmp];
+    }
+    return path;
+  }
+  public int[,] FloydWarshall(){
+    int[,] dist = new int[vertices + 1, vertices + 1];
+    for (int i = 1; i <= vertices; i++){
+      for (int j = 1; j <= vertices; j++){
+        if (i == j){
+          dist[i, j] = 0;
+          continue;
+        }
+        if (GetEdgeWeight(i, j) != 0){
+          dist[i, j] = GetEdgeWeight(i, j);
+        }else{
+          dist[i, j] = int.MaxValue;
+        }
+      }
+    }
+    int[,] pre = new int[vertices + 1, vertices + 1];
+    for (int i = 1; i <= vertices; i++){
+      for (int j = 1; j <= vertices; j++){
+        pre[i, j] = i;
+      }
+    }
+    for (int k = 1; k <= vertices; k++){
+      for (int u = 1; u <= vertices; u++){
+        for (int v = 1; v <= vertices; v++){
+          if (v == k || u == k || u == v)
+            continue;
+          if (dist[u, v] > dist[u, k] + dist[k, v]){
+            dist[u, v] = dist[u, k] + dist[k, v];
+            pre[u, v] = pre[k, v];
+          }
+        }
+      }
+    }
+    return dist;
   }
 }
